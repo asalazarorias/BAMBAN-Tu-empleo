@@ -192,6 +192,68 @@ POST /api/auth/login
 - `?city=Cochabamba`
 - `?search=texto`
 
+### 💬 Chat IA (`/api/chat`)
+
+| Método | Endpoint | Descripción | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/chat/ask` | Consultar asistente de empleos | No |
+| GET | `/api/chat/health` | Estado del servicio de chat | No |
+
+**Ejemplo de consulta:**
+```json
+POST /api/chat/ask
+Content-Type: application/json
+
+{
+  "message": "Busco trabajo de enfermera en Santa Cruz de la Sierra Bolivia",
+  "context": {
+    "location": "Santa Cruz",
+    "profession": "enfermera"
+  }
+}
+```
+
+**Respuesta exitosa:**
+```json
+{
+  "ok": true,
+  "data": {
+    "reply": "Te daré portales de empleo, empresas que contratan, y consejos para tu búsqueda...",
+    "suggestions": [
+      "Portales de empleo en Bolivia",
+      "Empresas que contratan",
+      "Consejos para entrevistas"
+    ]
+  }
+}
+```
+
+**Respuesta con error (sin conexión):**
+```json
+{
+  "ok": false,
+  "error": {
+    "code": "NETWORK_ERROR",
+    "title": "Sin conexión",
+    "message": "⚠️ No se pudo conectar al servicio. Por favor, verifica tu conexión a internet y vuelve a intentarlo."
+  }
+}
+```
+
+**Tipos de errores manejados:**
+- `NETWORK_ERROR` - Sin conexión a internet
+- `TIMEOUT_ERROR` - Tiempo de espera agotado
+- `AUTH_ERROR` - Credenciales inválidas (problema del servidor)
+- `RATE_LIMIT` - Demasiadas solicitudes
+- `INVALID_INPUT` - Mensaje vacío o inválido
+- `CONFIG_ERROR` - API key no configurada
+
+**Configuración requerida:**
+Agrega tu API key de OpenAI en `.env`:
+```env
+OPENAI_API_KEY=tu_clave_aqui
+```
+
 ### 🏢 Empresas (`/api/companies`)
 
 | Método | Endpoint | Descripción | Auth |

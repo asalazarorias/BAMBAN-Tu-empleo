@@ -20,6 +20,7 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/companies', require('./routes/companies'));
 app.use('/api/employees', require('./routes/employees'));
 app.use('/api/emprendimientos', require('./routes/emprendimientos'));
+app.use('/api/chat', require('./routes/chat'));
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
@@ -32,7 +33,8 @@ app.get('/', (req, res) => {
       jobs: '/api/jobs',
       companies: '/api/companies',
       employees: '/api/employees',
-      emprendimientos: '/api/emprendimientos'
+      emprendimientos: '/api/emprendimientos',
+      chat: '/api/chat'
     },
     documentation: 'Ver README.md para más información'
   });
