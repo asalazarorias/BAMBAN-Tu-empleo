@@ -21,6 +21,7 @@ app.use('/api/companies', require('./routes/companies'));
 app.use('/api/employees', require('./routes/employees'));
 app.use('/api/emprendimientos', require('./routes/emprendimientos'));
 app.use('/api/chat', require('./routes/chat'));
+app.use('/api/openai', require('./routes/openai'));
 
 // Ruta de bienvenida
 app.get('/', (req, res) => {
@@ -34,7 +35,8 @@ app.get('/', (req, res) => {
       companies: '/api/companies',
       employees: '/api/employees',
       emprendimientos: '/api/emprendimientos',
-      chat: '/api/chat'
+      chat: '/api/chat',
+      openai: '/api/openai'
     },
     documentation: 'Ver README.md para más información'
   });
